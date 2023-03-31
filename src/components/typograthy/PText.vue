@@ -1,13 +1,11 @@
 <template>
-$END$
+  <p><slot /></p>
 </template>
 
 <script>
 export default {
-name: "PText"
-}
+  name: 'PText',
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

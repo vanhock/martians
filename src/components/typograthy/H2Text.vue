@@ -1,15 +1,16 @@
 <template>
-  <h1 class="h1"><slot /></h1>
+  <h2 class="h2"><slot /></h2>
 </template>
 
 <script>
 export default {
-  name: "H1Text",
+  name: 'H2Text',
 };
 </script>
 
 <style scoped>
-.h1 {
+.h2 {
   display: inline;
+  font-size: 18px;
 }
 </style>
