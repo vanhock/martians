@@ -7,7 +7,7 @@
       <a ref="link" href="mailto:vanhocker@gmail.com">send me</a> another
       challenges.</p-text
     >
-    <v-button class="button" @click="reset">Here we go!</v-button>
+    <v-button class="button" @click="reset">Start again!</v-button>
   </div>
 </template>
 

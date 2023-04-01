@@ -13,7 +13,7 @@
       :pattern="pattern"
       :placeholder="placeholder"
       :autocomplete="autocomplete || type"
-      :inputmode="type"
+      :inputmode="inputMode || type"
       @input="$emit('update:modelValue', $event.target.value)"
     />
   </div>
@@ -65,6 +65,10 @@ export default {
       default: false
     },
     autocomplete: {
+      type: String,
+      default: ''
+    },
+    inputMode: {
       type: String,
       default: ''
     }

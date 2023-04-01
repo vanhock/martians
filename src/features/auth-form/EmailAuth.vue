@@ -18,8 +18,9 @@
       <v-input
         id="username"
         v-model="formEmail"
-        type="email"
+        type="text"
         autocomplete="username"
+        input-mode="email"
         name="email"
         label="Email (personal or work)"
         placeholder="mark@example.com"
@@ -97,8 +98,9 @@
       <v-input
           id="username"
           v-model="formEmail"
-          type="email"
+          type="text"
           autocomplete="username"
+          input-mode="email"
           name="email"
           label="Email (personal or work)"
           placeholder="mark@example.com"
