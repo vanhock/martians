@@ -11,7 +11,7 @@
         @sign-up="signUp"
         @view-changed="error = ''"
       />
-      <success-auth v-if="currentView === 'success'" @set-view="setView" />
+      <success-auth v-if="currentView === 'success'" @reset="resetForm" />
       <div v-if="error" class="auth__error">{{ error }}</div>
     </div>
   </div>
@@ -43,6 +43,9 @@ export default {
     setView(view) {
       if (this.views.indexOf(view) === -1) return;
       this.currentView = view;
+    },
+    resetForm() {
+      this.setView('email');
     },
     async checkEmail(email) {
       this.isLoading = true;

@@ -16,8 +16,10 @@
         <b>Test911</b>.</p-text
       >
       <v-input
+        id="username"
         v-model="formEmail"
         type="email"
+        autocomplete="username"
         name="email"
         label="Email (personal or work)"
         placeholder="mark@example.com"
@@ -43,7 +45,20 @@
       <p-text
         >You're creating a Martians Form account using {{ formEmail }}</p-text
       >
-      <v-input v-model="formEmail" name="email" type="hidden" />
+      <v-input
+          id="username"
+          v-model="formEmail"
+          type="email"
+          autocomplete="username"
+          name="email"
+          label="Email (personal or work)"
+          placeholder="mark@example.com"
+          :disabled="isLoading"
+          :pattern="validationPatterns.email"
+          autofocus
+          required
+          hidden
+      />
       <v-input
         ref="signupPassword"
         label="Password"
@@ -79,7 +94,20 @@
         <h1-text>Finish logging in</h1-text>
       </div>
       <p-text>Once you enter the password, you'll be all logged in.</p-text>
-      <v-input v-model="formEmail" name="email" type="hidden" />
+      <v-input
+          id="username"
+          v-model="formEmail"
+          type="email"
+          autocomplete="username"
+          name="email"
+          label="Email (personal or work)"
+          placeholder="mark@example.com"
+          :disabled="isLoading"
+          :pattern="validationPatterns.email"
+          autofocus
+          required
+          hidden
+      />
       <v-input
         label="Password"
         name="password"

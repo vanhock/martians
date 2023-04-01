@@ -7,7 +7,7 @@
       <a ref="link" href="mailto:vanhocker@gmail.com">send me</a> another
       challenges.</p-text
     >
-    <v-button class="button" @click="sendEmail">Here we go!</v-button>
+    <v-button class="button" @click="reset">Here we go!</v-button>
   </div>
 </template>
 
@@ -18,9 +18,10 @@ import PText from '@/components/typograthy/PText';
 export default {
   name: 'SuccessAuth',
   components: { PText, VButton, H1Text },
+  emits: ['reset'],
   methods: {
-    sendEmail() {
-      this.$refs.link.click();
+    reset() {
+      this.$emit('reset')
     },
   },
 };

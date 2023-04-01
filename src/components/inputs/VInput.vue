@@ -1,5 +1,5 @@
 <template>
-  <div class="input">
+  <div class="input" :data-hidden="hidden ? 'true' : undefined">
     <label v-if="label" :for="`input_${name}`">{{ label }}</label>
     <input
       :id="`input_${name}`"
@@ -12,7 +12,7 @@
       :autofocus="autofocus"
       :pattern="pattern"
       :placeholder="placeholder"
-      :autocomplete="type"
+      :autocomplete="autocomplete || type"
       :inputmode="type"
       @input="$emit('update:modelValue', $event.target.value)"
     />
@@ -60,6 +60,14 @@ export default {
       type: String,
       default: '',
     },
+    hidden: {
+      type: Boolean,
+      default: false
+    },
+    autocomplete: {
+      type: String,
+      default: ''
+    }
   },
   emits: ['update:modelValue'],
   mounted() {
@@ -72,6 +80,13 @@ export default {
 .input {
   width: 100%;
   margin-bottom: 15px;
+}
+.input[data-hidden] {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  z-index: -10;
 }
 .input input {
   width: 100%;

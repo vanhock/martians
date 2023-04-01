@@ -66,13 +66,12 @@ class ApiMock {
       throw new Error(this.errorCodes[500]);
     }
 
-    const user = new User(email, password);
-    const { id, name } = user.get();
-    this.users[id] = {
-      id,
-      name,
+    const userClass = new User(email, password);
+    const user = userClass.get();
+    this.users[user.id] = {
+      ...user
     };
-    return this.users[id];
+    return this.users[user.id];
   }
 }
 
