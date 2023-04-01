@@ -17,6 +17,7 @@
       >
       <v-input
         v-model="formEmail"
+        type="email"
         name="email"
         label="Email (personal or work)"
         placeholder="mark@example.com"
