@@ -1,5 +1,5 @@
 <template>
-  <div class="input" :data-hidden="hidden ? 'true' : undefined">
+  <div class="input" :data-hidden="hidden ? 'true' : undefined" :inert="hidden">
     <label v-if="label" :for="`input_${name}`">{{ label }}</label>
     <input
       :id="`input_${name}`"
@@ -87,8 +87,7 @@ export default {
 }
 .input[data-hidden] {
   position: absolute;
-  width: 0;
-  height: 0;
+  display: inline;
   opacity: 0;
   z-index: -10;
 }

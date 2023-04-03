@@ -1,128 +1,105 @@
 <template>
-  <div class="email-steps">
     <form
-      v-if="currentView === 'email'"
-      id="continue"
-      class="email-steps__step"
-      @submit.prevent="checkEmail"
+      class="email-steps"
+      @submit.prevent="handleFormSubmit"
     >
-      <h1-text>Log in or sign up</h1-text>
-      <p-text
+      <template v-if="currentView === 'email'">
+        <h1-text>Log in or sign up</h1-text>
+        <p-text
         >We'll check if you have an account, and help create one if you
-        don't.</p-text
-      >
-      <p-text class="auth__description"
+          don't.</p-text
+        >
+        <p-text class="auth__description"
         >For test login, use email: <b>test@gmail.com</b>, password:
-        <b>Test911</b>.</p-text
-      >
-      <v-input
-        id="username"
-        v-model="formEmail"
-        type="text"
-        autocomplete="username"
-        input-mode="email"
-        name="email"
-        label="Email (personal or work)"
-        placeholder="mark@example.com"
-        :disabled="isLoading"
-        :pattern="validationPatterns.email"
-        autofocus
-        required
-      />
-      <v-button class="button" :disabled="isLoading">Continue</v-button>
-    </form>
-    <form
-      v-if="currentView === 'signup'"
-      id="sign-up"
-      class="email-steps__step"
-      @submit.prevent="handleSignUp"
-    >
-      <div class="email-steps__title">
-        <button type="button" class="back-button" @click="setView('email')">
-          <back-icon />
-        </button>
-        <h1-text>Create your account</h1-text>
-      </div>
-      <p-text
+          <b>Test911</b>.</p-text
+        >
+      </template>
+      <template v-if="currentView === 'login'">
+        <div class="email-steps__title">
+          <button type="button" class="back-button" @click="setView('email')">
+            <back-icon />
+          </button>
+          <h1-text>Finish logging in</h1-text>
+        </div>
+        <p-text>Once you enter the password, you'll be all logged in.</p-text>
+      </template>
+
+      <template v-if="currentView !== 'signup'">
+        <v-input
+            id="username"
+            v-model="formEmail"
+            type="text"
+            autocomplete="username"
+            input-mode="email"
+            name="email"
+            label="Email (personal or work)"
+            placeholder="mark@example.com"
+            :disabled="isLoading"
+            :pattern="validationPatterns.email"
+            autofocus
+            required
+        />
+        <v-input
+            label="Password"
+            name="password"
+            type="password"
+            placeholder="Enter password"
+            :disabled="isLoading"
+            :pattern="validationPatterns.password"
+            autofocus
+            :required="currentView === 'login'"
+        />
+
+        <v-button class="button" :disabled="isLoading">Continue</v-button>
+      </template>
+
+      <template v-if="currentView === 'signup'">
+        <div class="email-steps__title">
+          <button type="button" class="back-button" @click="setView('email')">
+            <back-icon />
+          </button>
+          <h1-text>Create your account</h1-text>
+        </div>
+        <p-text
         >You're creating a Martians Form account using {{ formEmail }}</p-text
-      >
-      <v-input
-          id="username"
-          v-model="formEmail"
-          type="email"
-          autocomplete="username"
-          name="email"
-          label="Email (personal or work)"
-          placeholder="mark@example.com"
-          :disabled="isLoading"
-          :pattern="validationPatterns.email"
-          autofocus
-          required
-          hidden
-      />
-      <v-input
-        ref="signupPassword"
-        label="Password"
-        name="password1"
-        type="password"
-        placeholder="Enter password"
-        :disabled="isLoading"
-        :pattern="validationPatterns.password"
-        autofocus
-        required
-      />
-      <v-input
-        label="Retype password"
-        name="password2"
-        type="password"
-        placeholder="Enter password again"
-        :pattern="validationPatterns.password"
-        :disabled="isLoading"
-        required
-      />
-      <v-button class="button" :disabled="isLoading">Create account</v-button>
+        >
+        <v-input
+            id="username"
+            v-model="formEmail"
+            type="email"
+            autocomplete="username"
+            name="email"
+            label="Email (personal or work)"
+            placeholder="mark@example.com"
+            :disabled="isLoading"
+            :pattern="validationPatterns.email"
+            autofocus
+            required
+            hidden
+        />
+        <v-input
+            ref="signupPassword"
+            label="Password"
+            name="password1"
+            type="password"
+            placeholder="Enter password"
+            :disabled="isLoading"
+            :pattern="validationPatterns.password"
+            autofocus
+            required
+        />
+        <v-input
+            label="Retype password"
+            name="password2"
+            type="password"
+            placeholder="Enter password again"
+            :pattern="validationPatterns.password"
+            :disabled="isLoading"
+            required
+        />
+        <v-button class="button" :disabled="isLoading">Create account</v-button>
+      </template>
     </form>
-    <form
-      v-if="currentView === 'login'"
-      id="log-in"
-      class="email-steps__step"
-      @submit.prevent="handleLogIn"
-    >
-      <div class="email-steps__title">
-        <button type="button" class="back-button" @click="setView('email')">
-          <back-icon />
-        </button>
-        <h1-text>Finish logging in</h1-text>
-      </div>
-      <p-text>Once you enter the password, you'll be all logged in.</p-text>
-      <v-input
-          id="username"
-          v-model="formEmail"
-          type="text"
-          autocomplete="username"
-          input-mode="email"
-          name="email"
-          label="Email (personal or work)"
-          placeholder="mark@example.com"
-          :disabled="isLoading"
-          :pattern="validationPatterns.email"
-          autofocus
-          required
-          hidden
-      />
-      <v-input
-        label="Password"
-        name="password"
-        placeholder="Enter password"
-        type="password"
-        :pattern="validationPatterns.password"
-        :disabled="isLoading"
-        autofocus
-        required
-      />
-      <v-button class="button" :disabled="isLoading">Continue</v-button>
-    </form>
-  </div>
 </template>
 
 <script>
@@ -155,14 +132,17 @@ export default {
     },
   }),
   methods: {
-    checkEmail() {
-      this.$emit('check-email', this.formEmail);
-    },
-    handleSignUp(form) {
-      this.$emit('sign-up', form);
-    },
-    handleLogIn(form) {
-      this.$emit('log-in', form);
+    handleFormSubmit(event) {
+      switch (this.currentView) {
+        case 'email':
+          this.$emit('check-email', this.formEmail);
+          break;
+        case 'signup':
+          this.$emit('sign-up', event);
+          break;
+        case 'login':
+          this.$emit('log-in', event);
+      }
     },
     setView(view) {
       if (this.views.indexOf(view) === -1) return;
